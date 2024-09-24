@@ -1,90 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#FFFFFF">
+    tools:context=".MainActivity">
 
-
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:textSize="25sp"
-        android:maxLines="14"
-        android:background="#ffff1f"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <View
-        android:id="@+id/view"
+    <!-- Основной контент -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#261b82"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="25sp"
+            android:background="#abc2bf"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <TextView
-        android:id="@+id/News"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:gravity="center"
-        android:background="#FFFFFF"
-        android:text="Чем дальше в лес, тем шкибиди доп ес ес"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#261b82"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#261b82"
-        app:layout_constraintTop_toBottomOf="@+id/News"
-        tools:layout_editor_absoluteX="29dp" />
+        <ImageView
+            android:id="@+id/menub"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintTop_toBottomOf="@+id/News" />
+        <TextView
+            android:id="@+id/News"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            android:text="Чем дальше в лес, тем шкибиди доп ес ес"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/News" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#261b82"
+            app:layout_constraintTop_toBottomOf="@+id/News" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:text="              Выбрать дату               "
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/News" />
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintTop_toBottomOf="@+id/News" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/save"
+            app:layout_constraintTop_toBottomOf="@+id/News" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="              Выбрать дату               "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/News" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Выдвижное меню слева -->
+    <LinearLayout
+        android:id="@+id/left_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:padding="16dp">
+
+        <!-- Кнопки в меню -->
+        <Button
+            android:id="@+id/menu_button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="history" />
+
+        <Button
+            android:id="@+id/menu_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Кнопка 2"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/menu_button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Кнопка 3"
+            android:layout_marginTop="8dp" />
+
+        <!-- Больше кнопок по необходимости -->
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
