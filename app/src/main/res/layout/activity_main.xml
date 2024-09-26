@@ -42,10 +42,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/News"
+            android:id="@+id/quoteTextView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center"
+            android:padding="8dp"
             android:background="#FFFFFF"
             android:text="Чем дальше в лес, тем шкибиди доп ес ес"
             android:textSize="25sp"
@@ -57,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#261b82"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
         <ImageView
             android:id="@+id/save"
@@ -66,7 +67,7 @@
             android:layout_margin="10dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
         <ToggleButton
             android:id="@+id/toggleButton"
@@ -74,7 +75,7 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             app:layout_constraintEnd_toStartOf="@+id/save"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
         <TextView
             android:id="@+id/textView"
@@ -87,7 +88,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/toggleButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/News" />
+            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
