@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                     String responseData = response.body().string();
                     runOnUiThread(() -> {
                         try {
-                            // Парсим цитату и передаем на перевод
                             String englishQuote = parseQuote(responseData);
                             translateQuote(englishQuote);  // Переводим цитату на русский
                         } catch (JSONException e) {
@@ -141,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String parseQuote(String jsonData) throws JSONException {
-        // Парсинг ответа, берем цитату
         JSONArray jsonArray = new JSONArray(jsonData);
         JSONObject firstQuote = jsonArray.getJSONObject(0);
         String quote = firstQuote.getString("q");
@@ -151,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void translateQuote(String englishQuote) {
-        // URL запроса к веб-интерфейсу Google Translate
         String translateUrl = "https://translate.google.com/m?hl=ru&sl=en&tl=ru&ie=UTF-8&prev=_m&q=" + englishQuote;
 
         Request request = new Request.Builder().url(translateUrl).build();
@@ -168,10 +165,8 @@ public class MainActivity extends AppCompatActivity {
                     String htmlResponse = response.body().string();
                     runOnUiThread(() -> {
                         try {
-                            // Парсинг HTML ответа с помощью Jsoup
                             String translatedText = parseTranslatedText(htmlResponse);
 
-                            // Отображаем переведённую цитату
                             binding.quoteTextView.setText(translatedText);
 
                         } catch (Exception e) {
@@ -188,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
     private String parseTranslatedText(String htmlResponse) throws Exception {
         // Парсим HTML для извлечения переведённого текста
         Document doc = Jsoup.parse(htmlResponse);
-        Element translatedElement = doc.selectFirst("div.result-container");  // Ищем div с переведенным текстом
+        Element translatedElement = doc.selectFirst("div.result-container");
         if (translatedElement != null) {
             return translatedElement.text();
         } else {

@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="12dp"
             android:background="#FFFFFF"
             android:text="Чем дальше в лес, тем шкибиди доп ес ес"
             android:textSize="25sp"
