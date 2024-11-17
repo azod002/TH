@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_layout"
+    android:minWidth="100dp"
+    android:minHeight="100dp"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/my_text_widget"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen">
+</appwidget-provider>
+    <!-- android:updatePeriodMillis="0" - если крашит или еще что-то -->

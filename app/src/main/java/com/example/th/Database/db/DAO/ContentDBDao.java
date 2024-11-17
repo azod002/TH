@@ -24,6 +24,9 @@ public interface ContentDBDao {
     @Query("SELECT * FROM CONTENTDB")
     List<ContentDB> findAll();
 
+    @Query("SELECT * FROM ContentDB ORDER BY id DESC LIMIT 3")
+    List<ContentDB> getLast3Entries();
+
     @Query("DELETE FROM CONTENTDB WHERE content = :content")
     void deleteall(String content);
 }

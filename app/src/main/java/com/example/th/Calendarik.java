@@ -108,7 +108,7 @@ public class Calendarik extends AppCompatActivity {
 
             @Override
             public void onJustClicked(CalendarDB calendarDB) {
-
+                // Сюда можно вставить уведомлениия...
             }
         });
 

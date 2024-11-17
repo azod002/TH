@@ -1,5 +1,6 @@
 package com.example.th;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -80,14 +81,20 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
         binding.menuButton3.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, Profile.class));
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
         binding.save.setOnClickListener(v -> {
             String userInput = binding.input.getText().toString();
+            if (!(userInput.isEmpty())){
             ContentDB content = new ContentDB(userInput);
             System.out.println(content.getContent());
             database.getContentDao().insert(content);
+            MyTextWidget.updateAllWidgets(this);
             Toast.makeText(this, "Успех?", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Введите текст", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
