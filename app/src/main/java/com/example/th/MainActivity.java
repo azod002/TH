@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
         binding.menuButton2.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, Calendarik.class));
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
         binding.menuButton3.setOnClickListener(v -> {

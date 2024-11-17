@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Calendarik">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:firstDayOfWeek="2"
+            android:layout_centerInParent="true"
+            android:visibility="visible"/>
+
+        <View
+            android:id="@+id/selectedDateView"
+            android:layout_width="match_parent"
+            android:layout_marginStart="32dp"
+            android:layout_height="450dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:paddingTop="20dp"
+            android:background="#8888"
+            android:text="Выбранная дата появится здесь"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignStart="@+id/selectedDateView"
+            android:layout_alignTop="@+id/selectedDateView"
+            android:layout_alignEnd="@+id/selectedDateView"
+            android:layout_alignBottom="@+id/selectedDateView"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:id="@+id/Buttclose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_above="@+id/recyclerView"
+            android:layout_alignEnd="@+id/selectedDateView"
+            android:visibility="gone"
+             />
+
+        <Button
+            android:id="@+id/Buttplus"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginStart="140dp"
+            android:layout_below="@+id/recyclerView"
+            android:layout_alignStart="@+id/selectedDateView"
+            android:layout_alignEnd="@+id/selectedDateView"
+            android:text="+"
+            android:visibility="gone"
+             />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

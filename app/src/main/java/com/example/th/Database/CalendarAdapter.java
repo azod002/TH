@@ -8,43 +8,43 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.th.Database.Callbacks.OnContentClicked;
+import com.example.th.Database.Callbacks.OnPlanClicked;
+import com.example.th.Database.db.Entity.CalendarDB;
 import com.example.th.Database.db.Entity.ContentDB;
 import com.example.th.R;
 import com.example.th.databinding.ContentViewHolderBinding;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
+public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ContentViewHolder> {
+    private List<CalendarDB> calendarDB = new ArrayList<>();
+    private OnPlanClicked callback;
 
-    private List<ContentDB> contentDB = new ArrayList<>();
-    private OnContentClicked callback;
-
-    public ContentAdapter(List<ContentDB> contentDB, OnContentClicked callback) {
-        this.contentDB = contentDB;
+    public CalendarAdapter(List<CalendarDB> calendarDB, OnPlanClicked callback) {
+        this.calendarDB = calendarDB;
         this.callback = callback;
     }
 
     @NonNull
     @Override
-    public ContentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CalendarAdapter.ContentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_view_holder, parent, false);
-        return new ContentViewHolder(root);
+        return new CalendarAdapter.ContentViewHolder(root);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ContentViewHolder holder, int position) {
-        holder.update(contentDB.get(position));
+    public void onBindViewHolder(@NonNull CalendarAdapter.ContentViewHolder holder, int position) {
+        holder.update(calendarDB.get(position));
     }
 
     @Override
-    public int getItemCount() {
-        return contentDB.size();
-    }
+    public int getItemCount() {return calendarDB.size();}
 
-    public void addNewContent(ContentDB DB) {
-        contentDB.add(DB);
-        notifyItemInserted(contentDB.size() - 1);
+    public void addNewPlans(CalendarDB DB) {
+        calendarDB.add(DB);
+        notifyItemInserted(calendarDB.size() - 1);
     }
 
     public class ContentViewHolder extends RecyclerView.ViewHolder {
@@ -56,25 +56,24 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ContentDB content = contentDB.get(getAdapterPosition());
-                    callback.onJustClicked(content);
+                    CalendarDB plan = calendarDB.get(getAdapterPosition());
+                    callback.onJustClicked(plan);
                 }
             });
             binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    ContentDB content = contentDB.get(getAdapterPosition());
-                    contentDB.remove(getAdapterPosition());
+                    CalendarDB plan = calendarDB.get(getAdapterPosition());
+                    calendarDB.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
-                    callback.onRemoveClicked(content);
+                    callback.onRemoveClicked(plan);
                     return false;
                 }
             });
-
         }
 
-        public void update(ContentDB contentDB) {
-            binding.textContent.setText(contentDB.getContent());
+        public void update(CalendarDB calendarDB) {
+            binding.textContent.setText(calendarDB.getPlans());
         }
     }
 }

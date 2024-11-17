@@ -49,6 +49,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("org.jsoup:jsoup:1.13.1")
+    implementation("com.google.code.gson:gson:2.10")
 
     val room_version = "2.6.1"
 
