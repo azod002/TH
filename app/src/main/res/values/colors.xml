@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="on_secondary_container">#e8def8</color>
+    <color name="secondary_container">#4a4458</color>
+    <color name="surface_container">#211f26</color>
+    <color name="background">#141218</color>
+    <color name="on_primary">#381e72</color>
+    <color name="on_primary_fixed">#21005d</color>
+    <color name="primary">#d0bcfe</color>
+    <color name="primary_fixed">#eaddff</color>
 </resources>

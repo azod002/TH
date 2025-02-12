@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TH</string>
+    <string name="floating_action_button">Floating Action Button</string>
 </resources>

@@ -63,26 +63,20 @@ public class MainActivity extends AppCompatActivity {
         final EditText input = new EditText(MainActivity.this);
         initDatabase();
         fetchQuote();
-        initViews(binding.drawerLayout);
+        initViews();
 
     }
 
-    private void initViews(DrawerLayout drawerLayout) {
+    private void initViews() {
 
-        binding.menub.setOnClickListener(v -> {
-            toggleDrawer(drawerLayout, binding.leftDrawer);
-        });
-        binding.menuButton1.setOnClickListener(v -> {
+        binding.listButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, History.class));
-            drawerLayout.closeDrawer(binding.leftDrawer);
         });
-        binding.menuButton2.setOnClickListener(v -> {
+        binding.quoteTextView.setOnClickListener(v ->{
+            fetchQuote();
+        });
+        binding.profileButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Calendarik.class));
-            drawerLayout.closeDrawer(binding.leftDrawer);
-        });
-        binding.menuButton3.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, Profile.class));
-            drawerLayout.closeDrawer(binding.leftDrawer);
         });
         binding.save.setOnClickListener(v -> {
             String userInput = binding.input.getText().toString();
@@ -106,14 +100,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(binding.leftDrawer)) {
-            binding.drawerLayout.closeDrawer(binding.leftDrawer);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     private void initDatabase() {database = DatabaseManager.getInstance(this).getDatabase();}
 
