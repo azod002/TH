@@ -7,11 +7,9 @@
 
     <!-- Закругленные только верхние углы -->
     <corners
-        android:radius="24dp"/>
-
-    <size
-        android:height="68dp"
-        android:width="68dp"/>
+        android:radius="200dp"/>
+    <stroke
+        android:width="2dp"
+        android:color="@color/on_primary"/>
 
 </shape>
-

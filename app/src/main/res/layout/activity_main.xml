@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
+
     <View
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -13,7 +14,6 @@
         android:background="@color/surface_container"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
-
 
     <View
         android:id="@+id/input_container"
@@ -35,9 +35,10 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:gravity="top"
-        android:hint="Ваша заметка..."
+        android:hint="@string/input_hint"
         android:textColor="@color/on_primary"
         android:textColorHint="@color/on_primary"
+        android:backgroundTint="@color/secondary_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/input_container"
         app:layout_constraintStart_toStartOf="@+id/input_container"
@@ -49,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:text="12 Февраля"
-        android:textColor="@color/on_secondary_container"
+        android:textColor="@color/text_color"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/top_bar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,22 +71,24 @@
 
 
 
-    <ImageView
+    <Button
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
         android:id="@+id/list_button"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
-        android:src="@drawable/list_button"
+        android:background="@drawable/list_button"
         app:layout_constraintBottom_toBottomOf="@+id/top_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <Button
+        android:theme="@style/Theme.Material3.DynamicColors.Dark"
         android:id="@+id/profile_button"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/profile_button"
+        android:background="@drawable/profile_button"
         app:layout_constraintBottom_toBottomOf="@+id/top_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -105,7 +108,7 @@
         android:text="Здесь скоро будет цитата..."
         android:id="@+id/quoteTextView"
         android:layout_width="0dp"
-        android:textColor="@color/on_primary_fixed"
+        android:textColor="@color/text_color"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/quoteText_container"

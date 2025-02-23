@@ -3,15 +3,13 @@
     android:shape="rectangle">
 
     <!-- Цвет фона -->
-    <solid android:color="@color/primary"/> <!-- Замените на нужный цвет -->
+    <solid android:color="@color/secondary_container"/> <!-- Замените на нужный цвет -->
 
     <!-- Закругленные только верхние углы -->
     <corners
-        android:radius="24dp"/>
-
-    <size
-        android:height="68dp"
-        android:width="68dp"/>
+        android:topLeftRadius="48dp"
+        android:topRightRadius="48dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp"/>
 
 </shape>
-

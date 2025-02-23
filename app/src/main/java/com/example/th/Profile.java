@@ -2,6 +2,7 @@ package com.example.th;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -22,8 +23,11 @@ public class Profile extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         binding.uid.setText(FirebaseAuth.getInstance().getUid().toString());
+
+        binding.back.setOnClickListener(v ->{
+            startActivity(new Intent(Profile.this, MainActivity.class));
+        });
 
         binding.copy.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);

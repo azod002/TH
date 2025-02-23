@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Цвет фона -->
-    <solid android:color="@color/primary"/> <!-- Замените на нужный цвет -->
+    <solid android:color="@color/secondary_container"/> <!-- Замените на нужный цвет -->
 
     <!-- Закругленные только верхние углы -->
     <corners
@@ -16,7 +16,7 @@
     <!-- (Опционально) Обводка -->
     <stroke
         android:width="2dp"
-        android:color="#CCCCCC"/> <!-- Цвет обводки -->
+        android:color="@color/on_primary"/> <!-- Цвет обводки -->
 
     <!-- (Опционально) Отступы -->
     <padding

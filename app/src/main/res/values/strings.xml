@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">TH</string>
     <string name="floating_action_button">Floating Action Button</string>
+    <string name="exit_account">Выйти из аккаунта</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_hint">Логин</string>
+    <string name="account_already">У меня уже есть аккаунт, войти</string>
+    <string name="create_account">Создать</string>
+    <string name="register_new_account">Создать аккаунт</string>
+    <string name="login">Войти</string>
+    <string name="input_hint">Ваша заметка...</string>
+    <string name="profile">Профиль</string>
+    <string name="history_list">Список заметок</string>
 </resources>

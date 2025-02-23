@@ -1,5 +1,6 @@
 package com.example.th;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,11 +46,16 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;
     private OkHttpClient client = new OkHttpClient();
+    private String get_date(){
+        Calendar c = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM");
+        return sdf.format(c.getTime());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -59,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
+
+        binding.title.setText(get_date());
 
         final EditText input = new EditText(MainActivity.this);
         initDatabase();
@@ -76,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             fetchQuote();
         });
         binding.profileButton.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, Calendarik.class));
+            startActivity(new Intent(MainActivity.this, Profile.class));
         });
         binding.save.setOnClickListener(v -> {
             String userInput = binding.input.getText().toString();
