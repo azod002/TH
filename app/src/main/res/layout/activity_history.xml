@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
     android:id="@+id/main"
     android:background="@color/background"
     android:layout_width="match_parent"
@@ -36,7 +37,7 @@
         android:text="@string/history_list"/>
 
     <Button
-        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        style="@style/Base.Theme.TH"
         android:id="@id/back"
         android:layout_width="32dp"
         android:layout_height="32dp"

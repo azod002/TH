@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -16,7 +17,7 @@
         android:background="@color/surface_container" />
 
     <Button
-        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        style="@style/Base.Theme.TH"
         android:id="@id/back"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -42,8 +43,8 @@
 
     <View
         android:id="@+id/profile_circle"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_marginBottom="-32dp"
         android:background="@drawable/profile_circle"
         app:layout_constraintBottom_toTopOf="@+id/profile_container"
@@ -58,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="@id/top_bar"
         app:layout_constraintTop_toTopOf="@id/top_bar"
         android:textSize="20sp"
-        android:textColor="@color/material_dynamic_neutral_variant80"
+        android:textColor="@color/text_color"
         android:text="@string/profile"/>
 
     <TextView
@@ -84,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
-        android:theme="@style/Theme.Material3.DynamicColors.Dark"
+        style="@style/Base.Theme.TH"
         android:id="@+id/copy"
         android:layout_width="40dp"
         android:layout_height="40dp"

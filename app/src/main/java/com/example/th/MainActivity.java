@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -73,21 +74,34 @@ public class MainActivity extends AppCompatActivity {
         final EditText input = new EditText(MainActivity.this);
         initDatabase();
         fetchQuote();
-        initViews();
+        initViews(binding.drawerLayout);
 
     }
 
-    private void initViews() {
+    private void initViews(DrawerLayout drawerLayout) {
 
         binding.listButton.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, History.class));
+            toggleDrawer(drawerLayout, binding.leftDrawer);
         });
+
         binding.quoteTextView.setOnClickListener(v ->{
             fetchQuote();
         });
+
+        binding.history.setOnClickListener(v ->{
+            startActivity(new Intent(MainActivity.this, History.class));
+        });
+
+        binding.calendar.setOnClickListener(v ->{
+            startActivity(new Intent(MainActivity.this, Calendarik.class));
+            drawerLayout.closeDrawer(binding.leftDrawer);
+        });
+
         binding.profileButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Profile.class));
+            drawerLayout.closeDrawer(binding.leftDrawer);
         });
+
         binding.save.setOnClickListener(v -> {
             String userInput = binding.input.getText().toString();
             if (!(userInput.isEmpty())){
@@ -107,6 +121,15 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(drawerView);
         } else {
             drawerLayout.openDrawer(drawerView);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(binding.leftDrawer)) {
+            binding.drawerLayout.closeDrawer(binding.leftDrawer);
+        } else {
+            super.onBackPressed();
         }
     }
 

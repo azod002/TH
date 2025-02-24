@@ -11,4 +11,6 @@
     <string name="input_hint">Ваша заметка...</string>
     <string name="profile">Профиль</string>
     <string name="history_list">Список заметок</string>
+    <string name="calendar">Календарь</string>
+    <string name="name_title">TH</string>
 </resources>

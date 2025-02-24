@@ -1,9 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!--light theme-->
     <style name="Base.Theme.TH" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/surface_container</item>
+        <item name="android:theme">@style/Theme.Material3.DynamicColors.Light</item>
     </style>
-
     <style name="Theme.TH" parent="Base.Theme.TH" />
+    <color name="secondary_container">@color/material_dynamic_neutral_variant40</color>
+    <color name="surface_container">@color/material_dynamic_neutral_variant60</color>
+    <color name="background">@color/material_dynamic_neutral_variant90</color>
+    <color name="on_primary">@color/material_dynamic_primary10</color>
+    <color name="on_primary_fixed">@color/material_dynamic_tertiary20</color>
+    <color name="primary">@color/material_dynamic_primary50</color>
+    <color name="primary_fixed">@color/material_dynamic_tertiary50</color>
+    <color name="text_color">@color/material_dynamic_neutral_variant0</color>
+    <color name="drawer_container">@color/material_dynamic_secondary80</color>
 </resources>
