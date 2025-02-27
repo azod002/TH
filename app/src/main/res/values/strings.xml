@@ -13,4 +13,5 @@
     <string name="history_list">Список заметок</string>
     <string name="calendar">Календарь</string>
     <string name="name_title">TH</string>
+    <string name="plan_manager">Планировщик задач</string>
 </resources>

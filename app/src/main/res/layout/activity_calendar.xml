@@ -1,108 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Calendarik">
+    android:background="@color/background">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <View
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity">
+        android:layout_height="64dp"
+        android:background="@color/surface_container"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:firstDayOfWeek="2"
-            android:visibility="visible" />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="@string/plan_manager"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toEndOf="@id/back"
+        android:layout_marginStart="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/selectedDateView"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="200dp"
-            android:background="#8888"
-            android:paddingTop="20dp"
-            android:text="Выбранная дата появится здесь"
-            android:textSize="18sp"
-            android:visibility="gone" />
+    <Button
+        style="@style/Base.Theme.TH"
+        android:id="@id/back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_button"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toStartOf="@+id/top_bar"
+        app:layout_constraintTop_toTopOf="@+id/top_bar" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignStart="@+id/selectedDateView"
-            android:layout_alignTop="@+id/selectedDateView"
-            android:layout_alignEnd="@+id/selectedDateView"
-            android:layout_alignBottom="@+id/selectedDateView"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone" />
+    <View
+        android:id="@+id/chatContainer"
+        android:background="@color/surface_container"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
-        <Button
-            android:id="@+id/Buttclose"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_above="@+id/recyclerView"
-            android:layout_alignEnd="@+id/selectedDateView"
-            android:layout_marginEnd="16dp"
-            android:visibility="gone" />
+    <Button
+        android:id="@+id/btnGetChatResp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintTop_toTopOf="@id/chatContainer"
+        app:layout_constraintBottom_toBottomOf="@id/chatContainer"
+        android:layout_marginHorizontal="16dp"
+        android:text="Оптимизировать неделю"
+        android:textColor="@color/on_primary"/>
 
-        <Button
-            android:id="@+id/Buttplus"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/recyclerView"
-            android:layout_alignStart="@+id/selectedDateView"
-            android:layout_alignEnd="@+id/selectedDateView"
-            android:layout_marginStart="140dp"
-            android:layout_marginEnd="140dp"
-            android:text="+"
-            android:visibility="gone" />
+    <TextView
+        android:id="@+id/tvChatResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/surface_container"
+        app:layout_constraintTop_toTopOf="@id/chatContainer"
+        app:layout_constraintBottom_toBottomOf="@id/chatContainer"
+        app:layout_constraintStart_toStartOf="@id/chatContainer"
+        android:layout_marginStart="16dp"
+        android:text="Ответ чата"
+        android:textColor="@color/text_color"
+        android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/GetChatResp"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_below="@+id/calendarView"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="32dp"
-            android:gravity="center"
-            android:text="ABOBA"
-            android:textSize="25sp" />
+    <Button
+        android:id="@+id/btnCloseChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintTop_toTopOf="@id/chatContainer"
+        app:layout_constraintBottom_toBottomOf="@id/chatContainer"
+        app:layout_constraintEnd_toEndOf="@id/chatContainer"
+        android:layout_marginEnd="16dp"
+        android:text="Закрыть"
+        android:textColor="@color/on_primary"
+        android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/ChatResponse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Buttcl"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="gone" />
+    <TextView
+        android:background="@drawable/current_month_container"
+        android:textColor="@color/text_color"
+        android:gravity="center"
+        android:text="Месяц"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="32dp"
+        android:textSize="24sp"
+        android:id="@+id/tvCurrentMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <Button
-            android:id="@+id/Buttcl"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="2dp"
-            android:visibility="gone"/>
-
-
-    </RelativeLayout>
+    <!-- RecyclerView для календаря -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvCurrentMonth"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
