@@ -1,8 +1,9 @@
 package com.example.th;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import androidx.core.content.ContextCompat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,14 +89,14 @@ public class Calendarik extends AppCompatActivity {
 
         recyclerViewCalendar.setOnTouchListener(new OnSwipeTouchListener(this) {
             @Override
-            public void onSwipeLeft() {
+            public void onSwipeRight() {
                 currentMonthCalendar.add(Calendar.MONTH, -1);
                 updateMonthTitle();
                 loadMonthDays();
                 adapter.setDayItems(dayItems);
             }
             @Override
-            public void onSwipeRight() {
+            public void onSwipeLeft() {
                 // Переключаем календарь на следующий месяц
                 currentMonthCalendar.add(Calendar.MONTH, 1);
                 updateMonthTitle();
@@ -152,11 +153,10 @@ public class Calendarik extends AppCompatActivity {
 
     private void showDayDetailsDialog(DayItem dayItem) {
         if (dayItem.getDate().isEmpty()) return;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme);
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_day_details, null);
         builder.setView(dialogView);
-        builder.setTitle("Детали для " + dayItem.getDate());
 
         final android.widget.TextView tvDialogDate = dialogView.findViewById(R.id.tvDialogDate);
         final LinearLayout llDialogPlansContainer = dialogView.findViewById(R.id.llDialogPlansContainer);
@@ -167,7 +167,7 @@ public class Calendarik extends AppCompatActivity {
 
         btnDialogAddPlan.setOnClickListener(v -> {
             final EditText input = new EditText(this);
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme)
                     .setTitle("Добавить план для " + dayItem.getDate())
                     .setView(input)
                     .setPositiveButton("Ок", (dialog, which) -> {

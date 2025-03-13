@@ -3,9 +3,15 @@ package com.example.th;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 import android.os.Bundle;
+import android.os.Build;
 import android.view.View;
+import android.content.pm.PackageManager;
+import android.app.AlarmManager;
 import android.widget.EditText;
+import android.Manifest;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +24,8 @@ import com.example.th.Database.db.DatabaseManager;
 import com.example.th.Database.db.Entity.ContentDB;
 import com.example.th.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +48,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_NOTIFICATION = 1001;
     // Объект View Binding
     private ActivityMainBinding binding;
     //private ContentAdapter adapter;
@@ -60,6 +69,27 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        REQUEST_CODE_NOTIFICATION
+                );
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager != null && !alarmManager.canScheduleExactAlarms()) {
+                Toast.makeText(this, "Необходимо включить разрешение для напоминаний", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
+            }
+        }
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
             Intent a;
