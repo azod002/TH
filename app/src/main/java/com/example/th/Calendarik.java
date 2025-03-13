@@ -18,7 +18,6 @@ import com.example.th.Database.db.AppCalDB;
 import com.example.th.Database.db.DBManager2;
 import com.example.th.Database.db.Entity.CalendarDB;
 import com.example.th.DayItem;
-
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,6 +52,7 @@ public class Calendarik extends AppCompatActivity {
         tvCurrentMonth = findViewById(R.id.tvCurrentMonth);
         btnback = findViewById(R.id.back);
 
+
         recyclerViewCalendar.setLayoutManager(new GridLayoutManager(this, 7));
         currentMonthCalendar = Calendar.getInstance();
         updateMonthTitle();
@@ -66,7 +66,6 @@ public class Calendarik extends AppCompatActivity {
         btnback.setOnClickListener(v ->{
             startActivity(new Intent(Calendarik.this, MainActivity.class));
         });
-
         btnGetChatResp.setOnClickListener(v -> {
             isSelectingSevenDays = true;
             adapter.setWeekSelectionMode(true);
@@ -118,7 +117,6 @@ public class Calendarik extends AppCompatActivity {
 
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM", new Locale("ru"));
         sdf.setDateFormatSymbols(symbols);
-
         tvCurrentMonth.setText(sdf.format(currentMonthCalendar.getTime()));
     }
 
