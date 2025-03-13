@@ -2,6 +2,7 @@ package com.example.th;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.th.Database.db.AppCalDB;
 import com.example.th.Database.db.DBManager2;
 import com.example.th.Database.db.Entity.CalendarDB;
 import com.example.th.DayItem;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +36,7 @@ public class Calendarik extends AppCompatActivity {
 
     // Элементы UI для чат-ответа и навигации
     private View chatContainer;
-    private android.widget.Button btnGetChatResp, btnCloseChat, btnPrevMonth, btnNextMonth;
+    private android.widget.Button btnGetChatResp, btnCloseChat, btnPrevMonth, btnNextMonth, btnback;
     private android.widget.TextView tvChatResponse, tvCurrentMonth;
 
     @Override
@@ -47,9 +49,9 @@ public class Calendarik extends AppCompatActivity {
         btnGetChatResp = findViewById(R.id.btnGetChatResp);
         btnCloseChat = findViewById(R.id.btnCloseChat);
         tvChatResponse = findViewById(R.id.tvChatResponse);
-        btnPrevMonth = findViewById(R.id.btnPrevMonth);
-        btnNextMonth = findViewById(R.id.btnNextMonth);
         tvCurrentMonth = findViewById(R.id.tvCurrentMonth);
+        btnback = findViewById(R.id.back);
+
 
         recyclerViewCalendar.setLayoutManager(new GridLayoutManager(this, 7));
         currentMonthCalendar = Calendar.getInstance();
@@ -61,6 +63,9 @@ public class Calendarik extends AppCompatActivity {
                 startDay -> selectSevenConsecutiveDays(startDay));
         recyclerViewCalendar.setAdapter(adapter);
 
+        btnback.setOnClickListener(v ->{
+            startActivity(new Intent(Calendarik.this, MainActivity.class));
+        });
         btnGetChatResp.setOnClickListener(v -> {
             isSelectingSevenDays = true;
             adapter.setWeekSelectionMode(true);
@@ -81,23 +86,37 @@ public class Calendarik extends AppCompatActivity {
             btnGetChatResp.setVisibility(View.GONE);
         });
 
-        btnPrevMonth.setOnClickListener(v -> {
-            currentMonthCalendar.add(Calendar.MONTH, -1);
-            updateMonthTitle();
-            loadMonthDays();
-            adapter.setDayItems(dayItems);
+        recyclerViewCalendar.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeLeft() {
+                currentMonthCalendar.add(Calendar.MONTH, -1);
+                updateMonthTitle();
+                loadMonthDays();
+                adapter.setDayItems(dayItems);
+            }
+            @Override
+            public void onSwipeRight() {
+                // Переключаем календарь на следующий месяц
+                currentMonthCalendar.add(Calendar.MONTH, 1);
+                updateMonthTitle();
+                loadMonthDays();
+                adapter.setDayItems(dayItems);
+            }
         });
 
-        btnNextMonth.setOnClickListener(v -> {
-            currentMonthCalendar.add(Calendar.MONTH, 1);
-            updateMonthTitle();
-            loadMonthDays();
-            adapter.setDayItems(dayItems);
-        });
     }
 
     private void updateMonthTitle() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+        String[] months = {
+                "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+        };
+
+        DateFormatSymbols symbols = new DateFormatSymbols(new Locale("ru"));
+        symbols.setMonths(months);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM", new Locale("ru"));
+        sdf.setDateFormatSymbols(symbols);
         tvCurrentMonth.setText(sdf.format(currentMonthCalendar.getTime()));
     }
 

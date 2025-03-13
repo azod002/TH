@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true"
     android:id="@+id/main"
-    android:background="#FFFFFF"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".History">
@@ -11,9 +12,39 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+
+    <View
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/surface_container"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toEndOf="@id/back"
+        app:layout_constraintBottom_toBottomOf="@id/top_bar"
+        app:layout_constraintTop_toTopOf="@id/top_bar"
+        android:textSize="20sp"
+        android:textColor="@color/material_dynamic_neutral_variant80"
+        android:text="@string/history_list"/>
+
+    <Button
+        style="@style/Base.Theme.TH"
+        android:id="@id/back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_button"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toStartOf="@+id/top_bar"
+        app:layout_constraintTop_toTopOf="@+id/top_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

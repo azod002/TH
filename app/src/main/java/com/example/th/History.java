@@ -31,13 +31,16 @@ public class History extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.back.setOnClickListener(v ->{
+            startActivity(new Intent(History.this, MainActivity.class));
+        });
 
 
         initDatabase();

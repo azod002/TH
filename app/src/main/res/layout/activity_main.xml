@@ -5,126 +5,185 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".MainActivity">
 
-    <!-- Основной контент -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+
+    <View
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:layout_height="64dp"
+        android:background="@color/surface_container"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/input"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:textSize="25sp"
-            android:background="#abc2bf"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+    <View
+        android:id="@+id/input_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/text_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quoteText_container" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="#261b82"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/menub"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="top"
+        android:hint="@string/input_hint"
+        android:textColor="@color/on_primary"
+        android:textColorHint="@color/on_primary"
+        android:backgroundTint="@color/secondary_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/input_container"
+        app:layout_constraintStart_toStartOf="@+id/input_container"
+        app:layout_constraintTop_toTopOf="@+id/input_container"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/quoteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center"
-            android:padding="12dp"
-            android:background="#FFFFFF"
-            android:text="Чем дальше в лес, тем шкибиди доп ес ес"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="12 Февраля"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toEndOf="@id/list_button"
+        android:layout_marginStart="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#261b82"
-            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
-        <ImageView
-            android:id="@+id/save"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintEnd_toEndOf="@+id/view2"
-            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
+    <ImageButton
+        android:clickable="true"
+        android:id="@id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/fab"
+        android:focusable="true"
+        android:src="@drawable/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ToggleButton
-            android:id="@+id/toggleButton"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/save"
-            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:text="              Выбрать дату               "
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/toggleButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        style="@style/Base.Theme.TH"
+        android:id="@+id/list_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/list_button"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Выдвижное меню слева -->
+    <View
+        android:id="@+id/quoteText_container"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="45dp"
+        android:background="@drawable/quote_text_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <TextView
+        android:text="Здесь скоро будет цитата..."
+        android:id="@+id/quoteTextView"
+        android:layout_width="0dp"
+        android:textColor="@color/text_color"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quoteText_container"
+        app:layout_constraintEnd_toEndOf="@+id/quoteText_container"
+        app:layout_constraintStart_toStartOf="@+id/quoteText_container"
+        app:layout_constraintTop_toTopOf="@+id/quoteText_container"
+        app:layout_constraintVertical_bias="0.45" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <LinearLayout
         android:id="@+id/left_drawer"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/drawer_container"
         android:orientation="vertical"
-        android:background="@android:color/white"
-        android:padding="16dp">
+        tools:layout_editor_absoluteX="-5dp"
+        tools:layout_editor_absoluteY="2dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="@string/name_title"
+            android:textColor="@color/text_color"
+            android:textSize="42sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/text_color" />
+
 
         <!-- Кнопки в меню -->
         <Button
-            android:id="@+id/menu_button1"
+            android:id="@+id/history"
+            android:textColor="@color/text_color"
+            android:backgroundTint="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="history" />
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/history_list" />
 
         <Button
-            android:id="@+id/menu_button2"
+            android:id="@+id/calendar"
+            android:textColor="@color/text_color"
+            android:backgroundTint="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="calendar"
-            android:layout_marginTop="8dp" />
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/calendar" />
 
         <Button
-            android:id="@+id/menu_button3"
+            android:id="@+id/time_optimizer"
+            android:textColor="@color/text_color"
+            android:backgroundTint="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Кнопка 3"
-            android:layout_marginTop="8dp" />
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/time_optimizer" />
 
-        <!-- Больше кнопок по необходимости -->
+        <Button
+            android:id="@+id/profile_button"
+            android:textColor="@color/text_color"
+            android:backgroundTint="@color/primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile" />
 
     </LinearLayout>
-
 </androidx.drawerlayout.widget.DrawerLayout>

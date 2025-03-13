@@ -3,84 +3,108 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
-    <!-- Панель навигации по месяцам -->
-    <LinearLayout
-        android:id="@+id/monthNavigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+    <View
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/surface_container"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="@string/plan_manager"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toEndOf="@id/back"
+        android:layout_marginStart="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        style="@style/Base.Theme.TH"
+        android:id="@id/back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/back_button"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintStart_toStartOf="@+id/top_bar"
+        app:layout_constraintTop_toTopOf="@+id/top_bar" />
+
+    <View
+        android:id="@+id/chatContainer"
+        android:background="@color/surface_container"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/btnGetChatResp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintTop_toTopOf="@id/chatContainer"
+        app:layout_constraintBottom_toBottomOf="@id/chatContainer"
+        android:layout_marginHorizontal="16dp"
+        android:text="Оптимизировать неделю"
+        android:textColor="@color/on_primary"/>
+
+    <TextView
+        android:id="@+id/tvChatResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/surface_container"
+        app:layout_constraintTop_toTopOf="@id/chatContainer"
+        app:layout_constraintBottom_toBottomOf="@id/chatContainer"
+        app:layout_constraintStart_toStartOf="@id/chatContainer"
+        android:layout_marginStart="16dp"
+        android:text="Ответ чата"
+        android:textColor="@color/text_color"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnCloseChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintTop_toTopOf="@id/chatContainer"
+        app:layout_constraintBottom_toBottomOf="@id/chatContainer"
+        app:layout_constraintEnd_toEndOf="@id/chatContainer"
+        android:layout_marginEnd="16dp"
+        android:text="Закрыть"
+        android:textColor="@color/on_primary"
+        android:visibility="gone"/>
+
+    <TextView
+        android:background="@drawable/current_month_container"
+        android:textColor="@color/text_color"
+        android:gravity="center"
+        android:text="Месяц"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="32dp"
+        android:textSize="24sp"
+        android:id="@+id/tvCurrentMonth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/btnPrevMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="---" />
-
-        <TextView
-            android:id="@+id/tvCurrentMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Месяц"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp" />
-
-        <Button
-            android:id="@+id/btnNextMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="---" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- RecyclerView для календаря -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCalendar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/monthNavigation"
-        app:layout_constraintBottom_toTopOf="@+id/chatContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp"/>
-
-    <!-- Контейнер для чат-функционала -->
-    <LinearLayout
-        android:id="@+id/chatContainer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCurrentMonth"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <Button
-            android:id="@+id/btnGetChatResp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Оптимизировать неделю" />
-
-        <TextView
-            android:id="@+id/tvChatResponse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ответ чата"
-            android:visibility="gone"
-            android:padding="8dp" />
-
-        <Button
-            android:id="@+id/btnCloseChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Закрыть"
-            android:visibility="gone" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

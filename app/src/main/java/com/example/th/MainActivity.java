@@ -1,5 +1,6 @@
 package com.example.th;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;
     private OkHttpClient client = new OkHttpClient();
+    private String get_date(){
+        Calendar c = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM");
+        return sdf.format(c.getTime());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        binding.title.setText(get_date());
+
         final EditText input = new EditText(MainActivity.this);
         initDatabase();
         fetchQuote();
@@ -69,21 +80,28 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews(DrawerLayout drawerLayout) {
 
-        binding.menub.setOnClickListener(v -> {
+        binding.listButton.setOnClickListener(v -> {
             toggleDrawer(drawerLayout, binding.leftDrawer);
         });
-        binding.menuButton1.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, History.class));
-            drawerLayout.closeDrawer(binding.leftDrawer);
+
+        binding.quoteTextView.setOnClickListener(v ->{
+            fetchQuote();
         });
-        binding.menuButton2.setOnClickListener(v -> {
+
+        binding.history.setOnClickListener(v ->{
+            startActivity(new Intent(MainActivity.this, History.class));
+        });
+
+        binding.calendar.setOnClickListener(v ->{
             startActivity(new Intent(MainActivity.this, Calendarik.class));
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
-        binding.menuButton3.setOnClickListener(v -> {
+
+        binding.profileButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Profile.class));
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
+
         binding.save.setOnClickListener(v -> {
             String userInput = binding.input.getText().toString();
             if (!(userInput.isEmpty())){
@@ -114,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 
     private void initDatabase() {database = DatabaseManager.getInstance(this).getDatabase();}
 
