@@ -2,6 +2,7 @@
     <!--light theme-->
     <style name="Base.Theme.TH" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/surface_container</item>
+        <item name="android:navigationBarColor">@color/surface_container</item>
         <item name="android:theme">@style/Theme.Material3.DynamicColors.Light</item>
     </style>
     <style name="Theme.TH" parent="Base.Theme.TH" />
