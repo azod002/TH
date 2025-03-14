@@ -22,7 +22,7 @@ public class CalenViewModel extends AndroidViewModel {
     public CalenViewModel(@NonNull Application application) {
         super(application);
         database = DBManager2.getInstance(application).getDatabase();
-        String baseUrl = "https://37.221.127.152:5000/"; // При необходимости поменяйте на http и добавьте разрешения в манифест
+        String baseUrl = "https://194.87.205.173:5000/"; // При необходимости поменяйте на http и добавьте разрешения в манифест
         apiService = RetrofitClient.getClient(baseUrl).create(ApiService.class);
         promptResponse = new MutableLiveData<>();
     }
@@ -64,7 +64,7 @@ public class CalenViewModel extends AndroidViewModel {
                 if (response.isSuccessful() && response.body() != null) {
                     promptResponse.setValue(response.body().getReply());
                 } else {
-                    if (!(response.message().contains("37.221.127.152"))) {
+                    if (!(response.message().contains("194.87.205.173"))) {
                         promptResponse.setValue("Error: " + response.message());
                     } else {
                         promptResponse.setValue("Some Error with my ip?");
@@ -74,7 +74,7 @@ public class CalenViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<PromtResponse> call, Throwable t) {
-                if (t.getMessage().contains("37.221.127.152")){
+                if (t.getMessage().contains("194.87.205.173")){
                     promptResponse.setValue("Попробуйте еще раз позже...");
                 } else {
                     promptResponse.setValue("Failure: " + t.getMessage());
