@@ -29,13 +29,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Conten
 
     @NonNull
     @Override
-    public CalendarAdapter.ContentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_view_holder, parent, false);
-        return new CalendarAdapter.ContentViewHolder(root);
+        return new ContentViewHolder(root);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CalendarAdapter.ContentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ContentViewHolder holder, int position) {
         holder.update(calendarDB.get(position));
     }
 

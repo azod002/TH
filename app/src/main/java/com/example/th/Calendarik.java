@@ -1,5 +1,6 @@
 package com.example.th;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class Calendarik extends AppCompatActivity {
     private android.widget.Button btnGetChatResp, btnCloseChat, btnback;
     private android.widget.TextView tvChatResponse, tvCurrentMonth;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +101,7 @@ public class Calendarik extends AppCompatActivity {
         });
 
         recyclerViewCalendar.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public void onSwipeRight() {
                 currentMonthCalendar.add(Calendar.MONTH, -1);

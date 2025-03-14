@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,7 @@ import java.util.Locale;
 public class RemoteNotify extends AppCompatActivity {
 
     private EditText editTextUID, editTextMessage;
-    private Button selectTimeButton, buttonSend;
+    private Button selectTimeButton, buttonSend, backButton;
     private TextView textViewTime;
     private ListView listNotifications;
 
@@ -58,6 +59,7 @@ public class RemoteNotify extends AppCompatActivity {
         textViewTime = findViewById(R.id.textViewTime);
         buttonSend = findViewById(R.id.buttonSend);
         listNotifications = findViewById(R.id.listNotifications);
+        backButton = findViewById(R.id.back);
 
         firestore = FirebaseFirestore.getInstance();
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
@@ -84,6 +86,14 @@ public class RemoteNotify extends AppCompatActivity {
                         textViewTime.setText("Выбранное время: " + timeString);
                     }, hour, minute, true);
             timePicker.show();
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RemoteNotify.this, MainActivity.class));
+
+            }
         });
 
         buttonSend.setOnClickListener(v -> {

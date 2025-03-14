@@ -1,5 +1,6 @@
 package com.example.th;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,6 +18,7 @@ public class pomodoro extends AppCompatActivity {
     private TextView timerTextView;
     private Button startButton;
     private Spinner methodSpinner;
+    private Button backButton;
     private CountDownTimer countDownTimer;
     private boolean isWorkPeriod = true;
     private int cycleCount = 0;
@@ -33,6 +35,7 @@ public class pomodoro extends AppCompatActivity {
         timerTextView = findViewById(R.id.timerTextView);
         startButton = findViewById(R.id.startButton);
         methodSpinner = findViewById(R.id.methodSpinner);
+        backButton = findViewById(R.id.back);
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
                 new String[]{"Pomodoro (25/5)", "90/30", "52/17"});
@@ -45,6 +48,13 @@ public class pomodoro extends AppCompatActivity {
                 long duration = getDurationBasedOnMethod();
                 startTimer(duration);
                 startButton.setEnabled(false);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(pomodoro.this, MainActivity.class));
             }
         });
     }

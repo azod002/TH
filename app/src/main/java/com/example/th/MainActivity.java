@@ -3,11 +3,20 @@ package com.example.th;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Build;
+import android.content.pm.PackageManager;
+import android.Manifest;
+import android.app.AlarmManager;
+import android.provider.Settings;
+import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
 
 import com.example.th.Database.db.AppDatabase;
 import com.example.th.Database.db.DatabaseManager;
@@ -43,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel mainViewModel;
     private RecyclerView.LayoutManager layoutManager;
     private OkHttpClient client = new OkHttpClient();
+    private static final int REQUEST_CODE_NOTIFICATION = 1001;
 
     private String getDate(){
         Calendar c = Calendar.getInstance();
@@ -61,6 +71,31 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, Register.class));
             finish();
             return;
+        }
+
+        // Запрос разрешения для уведомлений (Android 13+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        REQUEST_CODE_NOTIFICATION
+                );
+            }
+        }
+
+        // Проверка и запрос разрешения для точных будильников (Android 12+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager != null && !alarmManager.canScheduleExactAlarms()) {
+                // Показываем Toast-сообщение о необходимости включения разрешения
+                Toast.makeText(this, "Необходимо включить разрешение для точных будильников", Toast.LENGTH_LONG).show();
+                // Перенаправляем пользователя в настройки для включения разрешения
+                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
+            }
         }
 
         // Инициализируем локальную базу данных
