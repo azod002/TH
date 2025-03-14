@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +20,13 @@ import com.example.th.Database.db.AppDatabase;
 import com.example.th.Database.db.DatabaseManager;
 import com.example.th.Database.db.Entity.ContentDB;
 import com.example.th.databinding.ActivityHistoryBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.List;
@@ -38,15 +44,12 @@ public class History extends AppCompatActivity {
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.back.setOnClickListener(v ->{
+        binding.back.setOnClickListener(v -> {
             startActivity(new Intent(History.this, MainActivity.class));
         });
 
-
         initDatabase();
         initRecyclerView();
-
-
     }
 
     private void initRecyclerView() {
@@ -54,12 +57,16 @@ public class History extends AppCompatActivity {
         adapter = new ContentAdapter(contentDBList, new OnContentClicked() {
             @Override
             public void onRemoveClicked(ContentDB contentDB) {
+                // Удаляем из локальной базы
                 database.getContentDao().delete(contentDB);
+                // Удаляем из Firebase
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseManager firebaseManager = FirebaseManager.getInstance(History.this, uid);
+                firebaseManager.deleteNote(contentDB);
             }
 
             @Override
             public void onJustClicked(ContentDB contentDB) {
-                System.out.println(contentDB);
                 Calendar calendar = Calendar.getInstance();
                 DatePickerDialog datePickerDialog = new DatePickerDialog(History.this,
                         (view, year, month, dayOfMonth) -> {
@@ -82,7 +89,6 @@ public class History extends AppCompatActivity {
                                         }
 
                                         int notificationId = (int) System.currentTimeMillis();
-
                                         scheduleNotification(History.this, selectedTime, contentDB.getContent(), notificationId);
                                         Toast.makeText(History.this, "Уведомление запланировано", Toast.LENGTH_SHORT).show();
                                     }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
@@ -93,7 +99,6 @@ public class History extends AppCompatActivity {
         });
 
         layoutManager = new LinearLayoutManager(this);
-
         binding.recyclerView.setLayoutManager(layoutManager);
         binding.recyclerView.setAdapter(adapter);
     }
@@ -122,8 +127,7 @@ public class History extends AppCompatActivity {
         }
     }
 
-
-
-
-    private void initDatabase() {database = DatabaseManager.getInstance(this).getDatabase();}
+    private void initDatabase() {
+        database = DatabaseManager.getInstance(this).getDatabase();
+    }
 }

@@ -166,16 +166,6 @@
             android:text="@string/calendar" />
 
         <Button
-            android:id="@+id/time_optimizer"
-            android:textColor="@color/text_color"
-            android:backgroundTint="@color/primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/time_optimizer" />
-
-        <Button
             android:id="@+id/profile_button"
             android:textColor="@color/text_color"
             android:backgroundTint="@color/primary"
@@ -184,6 +174,17 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/profile" />
+
+        <Button
+            android:id="@+id/technic_button"
+            android:textColor="@color/text_color"
+            android:backgroundTint="@color/primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile" />
+
 
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

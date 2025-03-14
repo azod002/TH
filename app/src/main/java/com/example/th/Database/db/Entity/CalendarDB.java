@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
-
 @Entity(tableName = "CalendarDB")
 public class CalendarDB {
     @PrimaryKey(autoGenerate = true)
@@ -17,6 +15,21 @@ public class CalendarDB {
     @ColumnInfo(name = "plans")
     private String plans;
 
+    @ColumnInfo(name = "status")
+    private String status;
+
+    public CalendarDB(String date, String plans, String status) {
+        this.date = date;
+        this.plans = plans;
+        this.status = status;
+    }
+
+    public CalendarDB(String date, String plans) {
+        this(date, plans, "Не начато");
+    }
+
+    public CalendarDB() {}
+
     public int getId() {
         return id;
     }
@@ -25,26 +38,27 @@ public class CalendarDB {
         this.id = id;
     }
 
-    public String getPlans() {
-        return plans;
-    }
-
-    public CalendarDB(String date, String plans) {
-        this.date = date;
-        this.plans = plans;
-    }
-
-    public CalendarDB() {}
-
-    public void setPlans(String plans) {
-        this.plans = plans;
-    }
-
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getPlans() {
+        return plans;
+    }
+
+    public void setPlans(String plans) {
+        this.plans = plans;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
