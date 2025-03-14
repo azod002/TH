@@ -6,7 +6,8 @@
     android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".Profile">
 
     <View
         android:id="@+id/top_bar"
@@ -62,26 +63,16 @@
         android:text="@string/profile"/>
 
     <TextView
-        android:id="@+id/text_uuid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/uid"
-        app:layout_constraintTop_toBottomOf="@+id/profile_circle"
-        android:text="Ваш UUID:"
-        android:textColor="@color/text_color"/>
-
-    <TextView
         android:id="@+id/uid"
-        android:layout_width="0dp"
+        android:layout_width="320dp"
         android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textColor="@color/text_color"
-        android:gravity="start"
-        android:layout_marginStart="16dp"
+        android:textColor="@color/material_dynamic_neutral_variant80"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/copy"
-        app:layout_constraintTop_toBottomOf="@+id/text_uuid" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_circle" />
 
     <Button
         android:layout_width="match_parent"
@@ -98,9 +89,10 @@
         android:id="@+id/copy"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/copy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_uuid" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_circle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

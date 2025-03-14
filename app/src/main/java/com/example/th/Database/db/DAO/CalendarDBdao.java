@@ -22,6 +22,9 @@ public interface CalendarDBdao {
     @Query("DELETE FROM calendardb WHERE date = :date AND plans = :plans")
     int DelByDatePlans(String date, String plans);
 
+    @Query("SELECT * FROM calendardb")
+    List<ContentDB> findAll();
+
     @Insert
     void insert(CalendarDB entity);
 

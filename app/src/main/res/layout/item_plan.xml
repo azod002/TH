@@ -14,12 +14,15 @@
         android:text="План"
         android:textSize="14sp" />
 
+    <Spinner
+        android:id="@+id/spinnerStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageButton
         android:id="@+id/btnDeletePlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_delete"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        />
+        android:background="?attr/selectableItemBackgroundBorderless" />
 </LinearLayout>
-

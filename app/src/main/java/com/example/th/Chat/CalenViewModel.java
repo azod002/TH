@@ -32,7 +32,6 @@ public class CalenViewModel extends AndroidViewModel {
     }
 
     public void fetchDataAndSendPrompt(ArrayList<String> dates) {
-        // Собираем планы для каждого из 7 дней
         List<String>[] allPlans = new List[7];
         for (int i = 0; i < 7; i++) {
             allPlans[i] = new ArrayList<>();

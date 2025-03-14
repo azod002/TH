@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.th.Database.db.Entity.CalendarDB;
 import com.example.th.DayItem;
 import java.util.List;
 
@@ -100,10 +102,11 @@ public class CalendarMonthAdapter extends RecyclerView.Adapter<CalendarMonthAdap
             String day = parts[0];
             tvDate.setText(day);
 
-            List<String> plans = dayItem.getPlans();
-            tvSummary1.setText(plans.size() > 0 ? plans.get(0) : "");
-            tvSummary2.setText(plans.size() > 1 ? plans.get(1) : "");
-            tvSummary3.setText(plans.size() > 2 ? plans.get(2) : "");
+            List<CalendarDB> plans = dayItem.getPlans();
+            tvSummary1.setText(plans.size() > 0 ? plans.get(0).getPlans() : "");
+            tvSummary2.setText(plans.size() > 1 ? plans.get(1).getPlans() : "");
+            tvSummary3.setText(plans.size() > 2 ? plans.get(2).getPlans() : "");
         }
+
     }
 }

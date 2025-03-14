@@ -1,12 +1,13 @@
 package com.example.th;
-import java.util.List;
 
+import com.example.th.Database.db.Entity.CalendarDB;
+import java.util.List;
 
 public class DayItem {
     private String date;
-    private List<String> plans;
+    private List<CalendarDB> plans;
 
-    public DayItem(String date, List<String> plans) {
+    public DayItem(String date, List<CalendarDB> plans) {
         this.date = date;
         this.plans = plans;
     }
@@ -15,11 +16,11 @@ public class DayItem {
         return date;
     }
 
-    public List<String> getPlans() {
+    public List<CalendarDB> getPlans() {
         return plans;
     }
 
-    public void addPlan(String plan) {
+    public void addPlan(CalendarDB plan) {
         plans.add(plan);
     }
 }

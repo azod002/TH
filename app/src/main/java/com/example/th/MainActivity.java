@@ -1,31 +1,23 @@
 package com.example.th;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.provider.Settings;
 import android.os.Bundle;
-import android.os.Build;
-import android.view.View;
-import android.content.pm.PackageManager;
-import android.app.AlarmManager;
-import android.widget.EditText;
-import android.Manifest;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.th.Database.ContentAdapter;
 import com.example.th.Database.db.AppDatabase;
 import com.example.th.Database.db.DatabaseManager;
 import com.example.th.Database.db.Entity.ContentDB;
+import com.example.th.Firebase.MainData;
+import com.example.th.Firebase.MainViewModel;
 import com.example.th.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,89 +32,64 @@ import java.util.Calendar;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_NOTIFICATION = 1001;
-    // Объект View Binding
     private ActivityMainBinding binding;
-    //private ContentAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private AppDatabase database;
+    private MainViewModel mainViewModel;
+    private RecyclerView.LayoutManager layoutManager;
     private OkHttpClient client = new OkHttpClient();
-    private String get_date(){
+
+    private String getDate(){
         Calendar c = Calendar.getInstance();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM");
         return sdf.format(c.getTime());
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                        REQUEST_CODE_NOTIFICATION
-                );
-            }
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            if (alarmManager != null && !alarmManager.canScheduleExactAlarms()) {
-                Toast.makeText(this, "Необходимо включить разрешение для напоминаний", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-                intent.setData(Uri.parse("package:" + getPackageName()));
-                startActivity(intent);
-            }
-        }
-
-        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            Intent a;
-            a = new Intent(MainActivity.this, Register.class);
-            startActivity(a);
+        // Если пользователь не залогинен, перенаправляем на регистрацию
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            startActivity(new Intent(MainActivity.this, Register.class));
             finish();
+            return;
         }
 
-
-        binding.title.setText(get_date());
-
-        final EditText input = new EditText(MainActivity.this);
+        // Инициализируем локальную базу данных
         initDatabase();
+
+        // Создаём MainViewModel с ключом "questions" и подписываемся на изменения данных
+        mainViewModel = MainViewModel.getInstance(this, "questions");
+        mainViewModel.getUsersLiveData().observe(this, mainData -> {
+            if (mainData != null && mainData.getContentList() != null) {
+                // Вставляем полученные данные в локальную БД
+                for (ContentDB content : mainData.getContentList()) {
+                    database.getContentDao().insert(content);
+                }
+            }
+        });
+
+        binding.title.setText(getDate());
         fetchQuote();
         initViews(binding.drawerLayout);
-
     }
 
     private void initViews(DrawerLayout drawerLayout) {
+        binding.listButton.setOnClickListener(v -> toggleDrawer(drawerLayout, binding.leftDrawer));
 
-        binding.listButton.setOnClickListener(v -> {
-            toggleDrawer(drawerLayout, binding.leftDrawer);
-        });
+        binding.quoteTextView.setOnClickListener(v -> fetchQuote());
 
-        binding.quoteTextView.setOnClickListener(v ->{
-            fetchQuote();
-        });
+        binding.history.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, History.class)));
 
-        binding.history.setOnClickListener(v ->{
-            startActivity(new Intent(MainActivity.this, History.class));
-        });
-
-        binding.calendar.setOnClickListener(v ->{
+        binding.calendar.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, Calendarik.class));
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
@@ -132,21 +99,30 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
 
+        binding.technicButton.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, RemoteNotify.class));
+            drawerLayout.closeDrawer(binding.leftDrawer);
+        });
+
         binding.save.setOnClickListener(v -> {
             String userInput = binding.input.getText().toString();
-            if (!(userInput.isEmpty())){
-            ContentDB content = new ContentDB(userInput);
-            System.out.println(content.getContent());
-            database.getContentDao().insert(content);
-            MyTextWidget.updateAllWidgets(this);
-            Toast.makeText(this, "Успех?", Toast.LENGTH_SHORT).show();
+            if (!userInput.isEmpty()){
+                ContentDB content = new ContentDB(userInput);
+                // Сохранение в локальную базу
+                database.getContentDao().insert(content);
+                // Сохранение в Firebase
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseManager firebaseManager = FirebaseManager.getInstance(MainActivity.this, uid);
+                firebaseManager.saveNote(content);
+                MyTextWidget.updateAllWidgets(this);
+                Toast.makeText(this, "Успех?", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Введите текст", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void toggleDrawer(DrawerLayout drawerLayout, View drawerView) {
+    private void toggleDrawer(DrawerLayout drawerLayout, android.view.View drawerView) {
         if (drawerLayout.isDrawerOpen(drawerView)) {
             drawerLayout.closeDrawer(drawerView);
         } else {
@@ -163,12 +139,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    private void initDatabase() {database = DatabaseManager.getInstance(this).getDatabase();}
+    private void initDatabase() {
+        database = DatabaseManager.getInstance(this).getDatabase();
+    }
 
     private void fetchQuote() {
-        String url = "https://zenquotes.io/api/random"; // API для получения случайной цитаты
-
+        String url = "https://zenquotes.io/api/random";
         Request request = new Request.Builder().url(url).build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -184,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         try {
                             String englishQuote = parseQuote(responseData);
-                            translateQuote(englishQuote);  // Переводим цитату на русский
+                            translateQuote(englishQuote);
                         } catch (JSONException e) {
                             binding.quoteTextView.setText("Ошибка обработки данных.");
                         }
@@ -201,15 +177,12 @@ public class MainActivity extends AppCompatActivity {
         JSONObject firstQuote = jsonArray.getJSONObject(0);
         String quote = firstQuote.getString("q");
         String author = firstQuote.getString("a");
-
         return "\"" + quote + "\"\n\n- " + author;
     }
 
     private void translateQuote(String englishQuote) {
         String translateUrl = "https://translate.google.com/m?hl=ru&sl=en&tl=ru&ie=UTF-8&prev=_m&q=" + englishQuote;
-
         Request request = new Request.Builder().url(translateUrl).build();
-
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -223,9 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         try {
                             String translatedText = parseTranslatedText(htmlResponse);
-
                             binding.quoteTextView.setText(translatedText);
-
                         } catch (Exception e) {
                             binding.quoteTextView.setText("Ошибка обработки перевода.");
                         }
@@ -238,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String parseTranslatedText(String htmlResponse) throws Exception {
-        // Парсим HTML для извлечения переведённого текста
         Document doc = Jsoup.parse(htmlResponse);
         Element translatedElement = doc.selectFirst("div.result-container");
         if (translatedElement != null) {
@@ -247,5 +217,4 @@ public class MainActivity extends AppCompatActivity {
             throw new Exception("Переведенный текст не найден");
         }
     }
-
 }

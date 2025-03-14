@@ -1,6 +1,6 @@
 package com.example.th;
 
-// NotificationReceiver.java
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,7 +28,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         createNotificationChannel(context);
 
-        Intent notificationIntent = new Intent(context, MainActivity.class);
+        Intent notificationIntent = new Intent(context, RemoteNotify.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 context,
                 0,
@@ -37,7 +37,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         );
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.notification)
+                .setSmallIcon(R.drawable.notification) // убедитесь, что этот ресурс существует
                 .setContentTitle("Напоминание")
                 .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
