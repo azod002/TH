@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="@id/top_bar"
         app:layout_constraintTop_toTopOf="@id/top_bar"
         android:textSize="20sp"
-        android:textColor="@color/material_dynamic_neutral_variant80"
+        android:textColor="@color/text_color"
         android:text="@string/history_list"/>
 
     <Button

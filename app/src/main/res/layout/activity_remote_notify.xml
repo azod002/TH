@@ -5,11 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".RemoteNotify">
 
     <!-- Поле для ввода UID получателя -->
     <EditText
+        android:textColor="@color/text_color"
         android:id="@+id/editTextUID"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,6 +23,7 @@
 
     <!-- Поле для ввода текста уведомления -->
     <EditText
+        android:textColor="@color/text_color"
         android:id="@+id/editTextMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -32,6 +35,8 @@
 
     <!-- Кнопка для выбора времени -->
     <Button
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/text_color"
         android:id="@+id/select_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +47,8 @@
 
     <!-- Текст для отображения выбранного времени -->
     <TextView
+        android:gravity="center"
+        android:textColor="@color/text_color"
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,6 +59,8 @@
 
     <!-- Кнопка отправки уведомления -->
     <Button
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/text_color"
         android:id="@+id/buttonSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,6 +72,7 @@
 
     <!-- Список для отображения полученных уведомлений за 48 часов -->
     <ListView
+        android:backgroundTint="@color/text_color"
         android:id="@+id/listNotifications"
         android:layout_width="0dp"
         android:layout_height="0dp"

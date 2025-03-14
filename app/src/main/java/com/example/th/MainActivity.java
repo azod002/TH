@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(binding.leftDrawer);
         });
 
+        binding.timeOptimizer.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, pomodoro.class));
+            drawerLayout.closeDrawer(binding.leftDrawer);
+        });
+
         binding.technicButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, RemoteNotify.class));
             drawerLayout.closeDrawer(binding.leftDrawer);

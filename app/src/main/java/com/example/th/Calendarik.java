@@ -159,7 +159,7 @@ public class Calendarik extends AppCompatActivity {
 
     private void showDayDetailsDialog(DayItem dayItem) {
         if (dayItem.getDate().isEmpty()) return;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme);
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_day_details, null);
         builder.setView(dialogView);
@@ -183,7 +183,7 @@ public class Calendarik extends AppCompatActivity {
             spinnerPlanStatus.setAdapter(spinnerAdapter);
             spinnerPlanStatus.setSelection(0);
 
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme)
                     .setTitle("Добавить план для " + dayItem.getDate())
                     .setView(addPlanView)
                     .setPositiveButton("Ок", (dialog, which) -> {

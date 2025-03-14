@@ -11,7 +11,13 @@
     <string name="input_hint">Ваша заметка...</string>
     <string name="profile">Профиль</string>
     <string name="history_list">Список заметок</string>
-    <string name="calendar">Календарь</string>
+    <string name="calendar">Планировщик задач</string>
     <string name="name_title">TH</string>
     <string name="plan_manager">Планировщик задач</string>
+    <string name="login_your_account">Войдите в свой аккаунт</string>
+    <string name="Welcome_back">С возвращением!</string>
+    <string name="Lets_get_acquainted">Давайте знакомиться!</string>
+    <string name="Enter_your_email_address_and_create_a_password">Введите почту и придумайте пароль</string>
+    <string name="time_optimizer">Оптимизаторы времени</string>
+    <string name="send_remate_notif">Отправка удалённых напоминаний</string>
 </resources>
